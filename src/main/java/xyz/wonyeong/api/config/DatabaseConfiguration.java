@@ -25,7 +25,7 @@ public class DatabaseConfiguration {
     @Bean
     DataSource dataSource() {
         DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("org.h2.Driver");
+        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
         dataSourceBuilder.url(DB_URL);
         dataSourceBuilder.username(DB_USERNAME);
         dataSourceBuilder.password(DB_PASSWORD);
