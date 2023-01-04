@@ -16,7 +16,7 @@ public class ToDoController {
 
     private final ToDoService toDoService;
 
-    @PostMapping("/todo")
+    @PostMapping("/api/todo")
     public ResponseEntity<ToDo> createToDo(@RequestBody CreateToDoRequestDto createToDoRequestDto) {
         ToDo createdTodo = toDoService.create(createToDoRequestDto);
 
@@ -24,7 +24,7 @@ public class ToDoController {
                 .body(createdTodo);
     }
 
-    @GetMapping("/todos")
+    @GetMapping("/api/todos")
     public ResponseEntity<List<ToDo>> getAllToDoList() {
         List<ToDo> toDoList = toDoService.getAll();
 
@@ -32,7 +32,7 @@ public class ToDoController {
                 .body(toDoList);
     }
 
-    @DeleteMapping("/todo/{todoId}")
+    @DeleteMapping("/api/todo/{todoId}")
     public ResponseEntity<ToDo> deleteToDo(@PathVariable long todoId) {
         toDoService.delete(todoId);
 
@@ -40,11 +40,16 @@ public class ToDoController {
                 .build();
     }
 
-    @PatchMapping("/todo")
+    @PatchMapping("/api/todo")
     public ResponseEntity<ToDo> updateToDo(@RequestBody UpdateToDoRequestDto updateToDoRequestDto) {
         ToDo updatedToDo = toDoService.changeCompletedStatus(updateToDoRequestDto);
 
         return ResponseEntity.ok()
                 .body(updatedToDo);
+    }
+
+    @GetMapping("/health-check")
+    public ResponseEntity<Void> checkStatus(){
+        return ResponseEntity.ok().build();
     }
 }
